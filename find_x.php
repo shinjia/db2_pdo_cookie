@@ -1,10 +1,8 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
-
 include 'config.php';
 include 'utility.php';
 
-$key = isset($_POST['key']) ? $_POST['key'] : '';
+$key = $_POST['key'] ?? '';
 
 // 網頁內容預設
 $ihc_content = '';
@@ -87,7 +85,6 @@ HEREDOC;
     if($total_rec==0) { $ihc_content = '<p class="center">無資料</p>';}
 }
 catch(PDOException $e) {
-    // db_error(ERROR_QUERY, $e->getMessage());
     $ihc_error = error_message('ERROR_QUERY', $e->getMessage());
 }
 

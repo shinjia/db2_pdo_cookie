@@ -1,9 +1,7 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
-
 // 網頁連結
-// $lnk_list = 'list_page.php';
-$lnk_list = 'list_find.php';
+$lnk_list = 'list_page.php';
+// $lnk_list = 'list_find.php';
 
 $html = <<< HEREDOC
 <h2 align="center">新增資料區</h2>

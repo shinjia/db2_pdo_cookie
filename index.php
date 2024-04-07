@@ -1,5 +1,4 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
 
 // 寫入 COOKIE
 setcookie('page', 1, time()+86400*7);

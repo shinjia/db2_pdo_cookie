@@ -1,22 +1,20 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
-
 include 'config.php';
 include 'utility.php';
 
 // 接收傳入變數
-$uid  = isset($_POST['uid'])  ? $_POST['uid'] : '';
+$uid  = $_POST['uid'] ?? '';
 
 // 寫入 cookie
 setcookie('uid', $uid, time()+86400*7);
 
-$usercode = isset($_POST['usercode']) ? $_POST['usercode'] : '';
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$address  = isset($_POST['address'])  ? $_POST['address']  : '';
-$birthday = isset($_POST['birthday']) ? $_POST['birthday'] : '';
-$height   = isset($_POST['height'])   ? $_POST['height']   : 0;
-$weight   = isset($_POST['weight'])   ? $_POST['weight']   : 0;
-$remark   = isset($_POST['remark'])   ? $_POST['remark']   : '';
+$usercode = $_POST['usercode'] ?? '';
+$username = $_POST['username'] ?? '';
+$address  = $_POST['address']  ?? '';
+$birthday = $_POST['birthday'] ?? '';
+$height   = $_POST['height']   ?? 0;
+$weight   = $_POST['weight']   ?? 0;
+$remark   = $_POST['remark']   ?? '';
 
 // 連接資料庫
 $pdo = db_open();
@@ -42,7 +40,6 @@ try {
    header('Location: ' . $lnk_display);
 }
 catch(PDOException $e) {
-   // db_error(ERROR_QUERY, $e->getMessage());
    $ihc_error = error_message('ERROR_QUERY', $e->getMessage());
    
    $html = <<< HEREDOC

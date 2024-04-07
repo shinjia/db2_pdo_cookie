@@ -1,8 +1,6 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
 
-function pagemake($content='', $head='')
-{
+function pagemake($content='', $head='') {
     $html = <<< HEREDOC
 <!DOCTYPE html>
 <html>

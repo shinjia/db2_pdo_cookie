@@ -1,6 +1,4 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
-
 include 'config.php';
 
 $table_name = 'person'; // 指定資料表名稱
@@ -19,25 +17,22 @@ CREATE TABLE person (
 )';
 
 
-$op = isset($_GET['op']) ? $_GET['op'] : 'HOME';
+$op = $_GET['op'] ?? 'HOME';
 
 
 $msg = '';
-switch($op)
-{
+switch($op) {
     case 'CREATE_TABLE' :
         $msg .= '資料表『' . $table_name . '』';
 
         $pdo = db_open();
         $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); //Error Handling
         $sqlstr = $sqlstr_install_table;
-        try
-        {
+        try {
             $pdo->exec($sqlstr);
             $msg .= '建立成功！';
         }
-        catch(PDOException $e)
-        {
+        catch(PDOException $e) {
             $msg .= '無法建立！<br>';
             $msg .= $e->getMessage();//Remove or change message in production code
         }
@@ -51,13 +46,11 @@ switch($op)
         $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); //Error Handling
 
         $sqlstr = 'DROP TABLE ' . $table_name;
-        try
-        {
+        try {
             $pdo->exec($sqlstr);
             $msg .= '刪除成功！';
         }
-        catch(PDOException $e)
-        {
+        catch(PDOException $e) {
             $msg .= '無法刪除！<br>';
             $msg .= $e->getMessage();//Remove or change message in production code
         }
@@ -74,13 +67,11 @@ switch($op)
         $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); //Error Handling
 
         $sqlstr = 'CREATE DATABASE ' . DB_DATABASE . ' DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci';
-        try
-        {
+        try {
             $pdo->exec($sqlstr);
             $msg .= '建立成功！';
         }
-        catch(PDOException $e)
-        {
+        catch(PDOException $e) {
             $msg .= '無法建立！<br>';
             $msg .= $e->getMessage();//Remove or change message in production code
         }

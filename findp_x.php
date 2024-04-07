@@ -1,25 +1,22 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
-
 // 含分頁之資料列表
-
 include 'config.php';
 include 'utility.php';
 
 // 可接收 GET 及 POST 傳入
-$key = isset($_POST['key']) ? $_POST['key'] : (isset($_GET['key'])?$_GET['key']:'');
+$key = $_POST['key'] ?? ($_GET['key'] ?? '');
 
 // 預先讀取 Cookie
-$cc_nump = isset($_COOKIE['nump']) ? $_COOKIE['nump'] : 10;
-$cc_uid = isset($_COOKIE['uid']) ? $_COOKIE['uid'] : 0;
+$cc_nump = $_COOKIE['nump'] ?? 10;
+$cc_uid = $_COOKIE['uid'] ?? 0;
 
 // 頁碼參數
 $page = 1;
 $cc_page = 1;
 
 // 頁碼參數 (有傳入時會改變 page)
-$page = isset($_GET['page']) ? $_GET['page'] : $cc_page;
-$nump = isset($_GET['nump']) ? $_GET['nump'] : $cc_nump;
+$page = $_GET['page'] ?? $cc_page;
+$nump = $_GET['nump'] ?? $cc_nump;
 
 // 再寫入 COOKIE
 setcookie('page', $page, time()+86400*7);
@@ -66,7 +63,6 @@ try {
     $total_page = ceil($total_rec / $nump);  // 計算總頁數
 }
 catch(PDOException $e) {
-    // db_error(ERROR_QUERY, $e->getMessage());
     $ihc_error = error_message(ERROR_QUERY, $e->getMessage());
 }
 
@@ -102,8 +98,7 @@ try {
 
         // 指定的 uid 記錄高亮顯示
         $str_highlight = '';
-        if($uid==$uid_highlight)
-        {
+        if($uid==$uid_highlight) {
             $str_highlight = 'class="hightlight"';
         }
 
@@ -163,7 +158,6 @@ HEREDOC;
     if($total_rec==0) { $ihc_content = '<p class="center">無資料</p>';}
 }
 catch(PDOException $e) {
-    // db_error(ERROR_QUERY, $e->getMessage());
     $ihc_error = error_message('ERROR_QUERY', $e->getMessage());
 }
 

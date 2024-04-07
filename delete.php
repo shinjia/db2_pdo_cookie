@@ -1,11 +1,9 @@
 <?php
-/* db2_pdo_cookie v1.0  @Shinjia  #2022/07/22 */
-
 include 'config.php';
 include 'utility.php';
 
 // 接收傳入變數
-$uid = isset($_GET['uid']) ? $_GET['uid'] : 0;
+$uid = $_GET['uid'] ?? 0;
 
 // 寫入 cookie
 setcookie('uid', $uid, time()+86400*7);
